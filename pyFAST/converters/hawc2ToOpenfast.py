@@ -169,7 +169,7 @@ def AE_PC_C2_toAD(ae_filename, pc_filename, blade_c2def, r_AD=None, ADbldFilenam
     aeroNodes[:, 2] = -xAC_H2  # BlSwpAC
     dr = np.gradient(aeroNodes[:, 0])
     dx = np.gradient(aeroNodes[:, 1])
-    aeroNodes[:, 3] = np.degrees(np.arctan2(dx, dr))*np.pi/180  # BlCrvAng
+    aeroNodes[:, 3] = np.degrees(np.arctan2(dx, dr))  # *np.pi/180  # BlCrvAng
     aeroNodes[:, 4] = -twist_H2  # BlTwist
     aeroNodes[:, 5] = chord_H2  # BlChord
     # One polar per radius..
@@ -211,7 +211,7 @@ def AE_PC_C2_toAD(ae_filename, pc_filename, blade_c2def, r_AD=None, ADbldFilenam
         # Ensure that first value match new value
         M[-1, 1:] = M[0, 1:]
         # Create an instance of Polar class for convenience
-        P = Polar(Re, alpha=M[:, 0], cl=M[:, 1],
+        P = Polar(Re=Re, alpha=M[:, 0], cl=M[:, 1],
                   cd=M[:, 2], cm=M[:, 3], radians=False)
         # P = Polar(Re, alpha=vAlpha, cl=M[:, 1],
         #          cd=M[:, 2], cm=M[:, 3], radians=False)
